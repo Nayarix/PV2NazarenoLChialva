@@ -1,10 +1,7 @@
 fileFormatVersion: 2
 guid: 60ff78c8f8719cd4e95d1d1ecf1d0b95
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 8062257410460974604
-    second: 0_Orc_Throwing_003_0
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -48,10 +45,10 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 0_Orc_Throwing_003_0
+      name: 0_Fallen_Angels_Idle_000_0
       rect:
         serializedVersion: 2
-        x: 287
-        y: 147
-        width: 401
-        height: 604
+        x: 223
+        y: 148
+        width: 438
+        height: 576
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +112,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c0e794e2664e2ef60800000000000000
-      internalID: 8062257410460974604
+      spriteID: e313d79966c638bd0800000000000000
+      internalID: -2629138569536655042
       vertices: []
       indices: 
       edges: []
@@ -135,7 +132,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      0_Orc_Throwing_003_0: 8062257410460974604
+      0_Fallen_Angels_Idle_000_0: -2629138569536655042
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

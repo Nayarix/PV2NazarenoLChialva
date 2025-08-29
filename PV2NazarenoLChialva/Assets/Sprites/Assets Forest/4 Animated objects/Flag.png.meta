@@ -1,19 +1,7 @@
 fileFormatVersion: 2
 guid: 698828716c6aed6439d745212024a04d
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 1805158079502305607
-    second: Flag_0
-  - first:
-      213: -477789389410734736
-    second: Flag_1
-  - first:
-      213: -8119871676797884261
-    second: Flag_2
-  - first:
-      213: 5006722515616286978
-    second: Flag_3
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -57,10 +45,10 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -84,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -109,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Flag_0
+      name: 0_Fallen_Angels_Idle_000_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 0
-        width: 32
-        height: 48
+        x: 223
+        y: 148
+        width: 438
+        height: 576
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,74 +112,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 749492c85b53d0910800000000000000
-      internalID: 1805158079502305607
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Flag_1
-      rect:
-        serializedVersion: 2
-        x: 56
-        y: 0
-        width: 32
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 07de8bee41d8e59f0800000000000000
-      internalID: -477789389410734736
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Flag_2
-      rect:
-        serializedVersion: 2
-        x: 104
-        y: 0
-        width: 32
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b98e4ba1bbb605f80800000000000000
-      internalID: -8119871676797884261
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Flag_3
-      rect:
-        serializedVersion: 2
-        x: 152
-        y: 0
-        width: 32
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2094248e9937b7540800000000000000
-      internalID: 5006722515616286978
+      spriteID: e313d79966c638bd0800000000000000
+      internalID: -2629138569536655042
       vertices: []
       indices: 
       edges: []
@@ -210,10 +132,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Flag_0: 1805158079502305607
-      Flag_1: -477789389410734736
-      Flag_2: -8119871676797884261
-      Flag_3: 5006722515616286978
+      0_Fallen_Angels_Idle_000_0: -2629138569536655042
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
