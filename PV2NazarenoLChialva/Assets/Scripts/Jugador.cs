@@ -4,9 +4,25 @@ using UnityEngine;
 
 public class Jugador : MonoBehaviour
 {
-    // Aquí defines tus variables y métodos, como el de ModificarVida
-    public void ModificarVida(float puntosDeDanio)
+    [Header("Configuracion")]
+    [SerializeField] private float vida = 5f;
+
+    public void ModificarVida(float puntos)
     {
-        // Tu lógica para modificar la vida del jugador aquí
+        vida += puntos;
+        Debug.Log(EstasVivo());
+    }
+
+
+    private bool EstasVivo()
+    {
+        return vida > 0;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.gameObject.CompareTag("Meta")) { return; }
+
+        Debug.Log("GANASTE");
     }
 }
