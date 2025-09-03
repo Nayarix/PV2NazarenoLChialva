@@ -1313,7 +1313,7 @@ PrefabInstance:
       addedObject: {fileID: 1269990163762147368}
     - targetCorrespondingSourceObject: {fileID: 3363586334923304809, guid: b6c689f0f93ed5a419690bed2f6de14c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1269990163762147371}
+      addedObject: {fileID: 1269990163762147369}
   m_SourcePrefab: {fileID: 100100000, guid: b6c689f0f93ed5a419690bed2f6de14c, type: 3}
 --- !u!1 &1269990163762147356 stripped
 GameObject:
@@ -1432,7 +1432,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1269990163762147371
+--- !u!114 &1269990163762147369
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1445,12 +1445,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocidad: 5
-  animator: {fileID: 1269990163762147368}
-  FuezaDeSalto: 30
-  longitudRaycast: 0.8
+  animator: {fileID: 0}
+  FuezaDeSalto: 10
+  longitudRaycast: 0.1
   capaSuelo:
     serializedVersion: 2
-    m_Bits: 72
+    m_Bits: 0
   gravedadSalto: 3
 --- !u!1001 &5133089952339256866
 PrefabInstance:

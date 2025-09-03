@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -9,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public LayerMask capaSuelo;
     public float gravedadSalto = 3.0f;
     private bool EnSuelo;
+    private bool recibiendoDanio;
+
     private Rigidbody2D rb;
 
     
@@ -37,7 +41,7 @@ public class PlayerController : MonoBehaviour
         }
 
         animator.SetBool("EnSuelo", EnSuelo);
-
+        animator.SetBool("RecibeDanio", recibiendoDanio);
 
         if (rb.linearVelocity.y < 0)
         {
@@ -61,7 +65,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    
+    public void RecibirDanio(Vector2 direccion, int cantDanio)
+    {
+        if (!recibiendoDanio)
+        {
+            recibiendoDanio = true;
+            Vector2 rebote = new Vector2(transform.position.x - direccion.x, 1).normalized;
+            rb.AddForce(rebote, ForceMode2D.Impulse);
+        }
+    }
+    public void DesactivaDanio()
+    {
+        recibiendoDanio = false;
+    }
+
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
