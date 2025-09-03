@@ -1307,6 +1307,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3363586334923304809, guid: b6c689f0f93ed5a419690bed2f6de14c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1269990163762147367}
+    - targetCorrespondingSourceObject: {fileID: 3363586334923304809, guid: b6c689f0f93ed5a419690bed2f6de14c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1269990163762147368}
+    - targetCorrespondingSourceObject: {fileID: 3363586334923304809, guid: b6c689f0f93ed5a419690bed2f6de14c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1269990163762147371}
   m_SourcePrefab: {fileID: 100100000, guid: b6c689f0f93ed5a419690bed2f6de14c, type: 3}
 --- !u!1 &1269990163762147356 stripped
 GameObject:
@@ -1320,7 +1326,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1269990163762147356}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b93c9ac0fdcddc488ad76c9dde53aba, type: 3}
   m_Name: 
@@ -1403,6 +1409,42 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 10.148986, y: 17.469376}
   m_EdgeRadius: 0
+--- !u!95 &1269990163762147368
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269990163762147356}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bf1f431fe1165af4d80294b6ccc98245, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1269990163762147371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269990163762147356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 483720d0a765245438f227b0b0f3abe9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocidad: 5
+  animator: {fileID: 1269990163762147368}
 --- !u!1001 &5133089952339256866
 PrefabInstance:
   m_ObjectHideFlags: 0
