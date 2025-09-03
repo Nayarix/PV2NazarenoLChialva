@@ -1058,6 +1058,21 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 10.744738, y: 15.479502}
   m_EdgeRadius: 0
+--- !u!114 &700451744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700451733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6eebd17440e5a94d963af6ef2322b47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1269990163762147361}
+  detectRadius: 5
+  speed: 2
 --- !u!1 &1576291583
 GameObject:
   m_ObjectHideFlags: 0
@@ -1528,6 +1543,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6293122654902090535, guid: c8da9661303022847b107554afe16dd7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 700451739}
+    - targetCorrespondingSourceObject: {fileID: 6293122654902090535, guid: c8da9661303022847b107554afe16dd7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 700451744}
   m_SourcePrefab: {fileID: 100100000, guid: c8da9661303022847b107554afe16dd7, type: 3}
 --- !u!1001 &7295037647477297085
 PrefabInstance:
