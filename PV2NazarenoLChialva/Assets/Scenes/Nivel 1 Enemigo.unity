@@ -1460,12 +1460,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocidad: 5
-  animator: {fileID: 0}
-  FuezaDeSalto: 10
-  longitudRaycast: 0.1
+  animator: {fileID: 1269990163762147368}
+  FuezaDeSalto: 30
+  longitudRaycast: 0.79
   capaSuelo:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 72
   gravedadSalto: 3
 --- !u!1001 &5133089952339256866
 PrefabInstance:
