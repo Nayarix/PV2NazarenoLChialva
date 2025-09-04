@@ -11,8 +11,8 @@ public class PlayerController : MonoBehaviour
     public LayerMask capaSuelo;
     public float gravedadSalto = 3.0f;
     private bool EnSuelo;
+    private bool estaAtacando; // Cambiado el nombre de la variable para evitar conflicto
 
-    // Nuevo: para controlar el estado de daño
     public float tiempoInvencibilidad = 0.5f;
     private bool recibiendoDanio = false;
 
@@ -40,6 +40,12 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(new Vector2(0f, FuezaDeSalto), ForceMode2D.Impulse);
         }
 
+        // Corregido: Llamada a la función de ataque
+        if (Input.GetKeyDown(KeyCode.Z) && !estaAtacando && EnSuelo)
+        {
+            IniciarAtaque();
+        }
+
         animator.SetBool("EnSuelo", EnSuelo);
 
         if (rb.linearVelocity.y < 0)
@@ -61,18 +67,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Nuevo: Lógica para recibir daño
+    // Función para iniciar el ataque
+    private void IniciarAtaque()
+    {
+        estaAtacando = true;
+        animator.SetBool("Atacando", estaAtacando);
+    }
+
+    // La función `DesactivaAtaque()` debe ser llamada por un evento de animación
+    // Si la llamas en el código, podría desactivarse antes de que termine la animación
+    public void DesactivarAtaque()
+    {
+        estaAtacando = false;
+        animator.SetBool("Atacando", estaAtacando);
+    }
+
     public void RecibirDanio(float puntos)
     {
         if (!recibiendoDanio)
         {
-            // Llama a la función del script Jugador para modificar la vida
             GetComponent<Jugador>().ModificarVida(-puntos);
-
-            // Activa el booleano del Animator para la animación de daño
             animator.SetBool("RecibeDanio", true);
-
-            // Inicia la Coroutine de invencibilidad y reseteo del Animator
             StartCoroutine(DanioCorrutina());
         }
     }
@@ -80,11 +95,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator DanioCorrutina()
     {
         recibiendoDanio = true;
-
-        // Espera un tiempo para la animación de daño
         yield return new WaitForSeconds(tiempoInvencibilidad);
-
-        // Desactiva la animación y el estado de invencibilidad
         animator.SetBool("RecibeDanio", false);
         recibiendoDanio = false;
     }
