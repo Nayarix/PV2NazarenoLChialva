@@ -1467,6 +1467,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 72
   gravedadSalto: 3
+  tiempoInvencibilidad: 0.5
 --- !u!1001 &5133089952339256866
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1475,6 +1476,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1771373958916708862, guid: c8da9661303022847b107554afe16dd7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5477001887216665652, guid: c8da9661303022847b107554afe16dd7, type: 3}
       propertyPath: m_Radius
       value: 8.108254
