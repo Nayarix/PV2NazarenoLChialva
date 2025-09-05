@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class Jugador : MonoBehaviour
 {
+    // Corregido: La variable 'vida' ahora es pública para que pueda ser accedida desde otros scripts
     [Header("Configuracion")]
-    [SerializeField] private float vida = 5f;
+    public float vida = 5f;
 
     public void ModificarVida(float puntos)
     {
         vida += puntos;
-        
         Debug.Log("Vida actual del jugador: " + vida);
     }
 
-
-    public   bool EstasVivo()
+    public bool EstasVivo()
     {
         return vida > 0;
     }
