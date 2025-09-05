@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private bool recibiendoDanio = false;
 
     private Rigidbody2D rb;
+    private Jugador jugador; // Referencia al script Jugador
 
     private float escalaX = 0.08692736f;
     private float escalaY = 0.0876511f;
@@ -24,10 +25,18 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        jugador = GetComponent<Jugador>(); // Obtenemos la referencia al inicio
     }
 
     void Update()
     {
+        // VERIFICACI�N DE MUERTE: Salimos del m�todo si el jugador no est� vivo
+        if (!jugador.EstasVivo())
+        {
+            rb.linearVelocity = Vector2.zero; // Detenemos al personaje
+            return; // No ejecutamos el resto del c�digo
+        }
+
         float velocidadX = Input.GetAxis("Horizontal");
         transform.position += new Vector3(velocidadX * velocidad * Time.deltaTime, 0, 0);
         animator.SetFloat("movement", Mathf.Abs(velocidadX));
@@ -46,7 +55,6 @@ public class PlayerController : MonoBehaviour
         }
 
         animator.SetBool("EnSuelo", EnSuelo);
-     
 
         if (rb.linearVelocity.y < 0)
         {
@@ -84,8 +92,16 @@ public class PlayerController : MonoBehaviour
         if (!recibiendoDanio)
         {
             GetComponent<Jugador>().ModificarVida(-puntos);
-            animator.SetBool("RecibeDanio", true);
-            StartCoroutine(DanioCorrutina());
+
+            if (!jugador.EstasVivo())
+            {
+                animator.SetBool("Muerto", true);
+            }
+            else
+            {
+                animator.SetBool("RecibeDanio", true);
+                StartCoroutine(DanioCorrutina());
+            }
         }
     }
 

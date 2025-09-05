@@ -15,7 +15,7 @@ public class Jugador : MonoBehaviour
     }
 
 
-    private bool EstasVivo()
+    public   bool EstasVivo()
     {
         return vida > 0;
     }
