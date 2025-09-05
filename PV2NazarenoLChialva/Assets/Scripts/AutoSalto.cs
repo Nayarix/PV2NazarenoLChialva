@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class AutoSalto : MonoBehaviour
 {
-    // Variables a configurar desde el editor
+
     [Header("Configuracion")]
     [SerializeField] private float fuerzaSalto = 5f;
 
     private Rigidbody2D miRigidbody2D;
 
-    // Codigo ejecutado cuando el objeto se activa en el nivel
+
     private void OnEnable()
     {
         miRigidbody2D = GetComponent<Rigidbody2D>();

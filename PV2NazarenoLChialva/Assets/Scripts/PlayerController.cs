@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask capaSuelo;
     public float gravedadSalto = 3.0f;
     private bool EnSuelo;
-    private bool estaAtacando; // Cambiado el nombre de la variable para evitar conflicto
+    private bool estaAtacando;
 
     public float tiempoInvencibilidad = 0.5f;
     private bool recibiendoDanio = false;
@@ -40,13 +40,13 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(new Vector2(0f, FuezaDeSalto), ForceMode2D.Impulse);
         }
 
-        // Corregido: Llamada a la función de ataque
         if (Input.GetKeyDown(KeyCode.Z) && !estaAtacando && EnSuelo)
         {
             IniciarAtaque();
         }
 
         animator.SetBool("EnSuelo", EnSuelo);
+     
 
         if (rb.linearVelocity.y < 0)
         {
@@ -67,15 +67,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Función para iniciar el ataque
     private void IniciarAtaque()
     {
         estaAtacando = true;
         animator.SetBool("Atacando", estaAtacando);
     }
 
-    // La función `DesactivaAtaque()` debe ser llamada por un evento de animación
-    // Si la llamas en el código, podría desactivarse antes de que termine la animación
     public void DesactivarAtaque()
     {
         estaAtacando = false;

@@ -10,7 +10,8 @@ public class Jugador : MonoBehaviour
     public void ModificarVida(float puntos)
     {
         vida += puntos;
-        Debug.Log(EstasVivo());
+        
+        Debug.Log("Vida actual del jugador: " + vida);
     }
 
 

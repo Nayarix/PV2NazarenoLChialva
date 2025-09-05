@@ -1,23 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Herir : MonoBehaviour
+public class HerirEnemigo : MonoBehaviour
 {
     [Header("Configuracion")]
-    [SerializeField] float puntos = 5f;
+    [SerializeField] float puntosDeDanio = 5f;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Enemigo"))
         {
-            // Llama al script PlayerController
-            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+            EnemyController enemigo = other.gameObject.GetComponent<EnemyController>();
 
-            if (player != null)
+            if (enemigo != null)
             {
-                player.RecibirDanio(puntos); // Llama a la nueva función
-                Debug.Log("PUNTOS DE DAÑO REALIZADOS AL JUGADOR " + puntos);
+                enemigo.RecibirDanio(puntosDeDanio);
+                Debug.Log("¡Enemigo dañado!");
             }
         }
     }
