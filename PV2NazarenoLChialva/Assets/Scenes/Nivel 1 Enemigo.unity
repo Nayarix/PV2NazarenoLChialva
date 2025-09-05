@@ -1334,7 +1334,7 @@ MonoBehaviour:
   speed: 2
   attackRadius: 1
   attackInterval: 1
-  puntosDeDanio: 1
+  puntosDeDanio: 4
   vida: 10
 --- !u!95 &700451745
 Animator:
