@@ -7,9 +7,9 @@ public class EnemyController : MonoBehaviour
     public Transform player;
     public float detectRadius = 5.0f;
     public float speed = 2.0f;
-    public float attackRadius = 1.0f; 
-    public float attackInterval = 1.0f; 
-    public float puntosDeDanio = 5.0f; 
+    public float attackRadius = 1.0f;
+    public float attackInterval = 1.0f;
+    public float puntosDeDanio = 5.0f;
 
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -18,6 +18,9 @@ public class EnemyController : MonoBehaviour
     private bool recibiendoDanio;
     private bool enRangoDeAtaque;
     private float tiempoSiguienteAtaque;
+    private bool estaAtacando;
+
+    private Jugador jugadorScript;
 
     [Header("Vida del Enemigo")]
     [SerializeField] private float vida = 10f;
@@ -27,10 +30,31 @@ public class EnemyController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         tiempoSiguienteAtaque = 0f;
+        estaAtacando = false;
+
+        jugadorScript = player.GetComponent<Jugador>();
     }
 
     void Update()
     {
+
+        if (!jugadorScript.EstasVivo())
+        {
+            EnMovimiento = false;
+            movement = Vector2.zero;
+            animator.SetBool("EnMovimiento", EnMovimiento);
+            return;
+        }
+
+        
+        if (estaAtacando)
+        {
+            movement = Vector2.zero;
+            EnMovimiento = false;
+            animator.SetBool("EnMovimiento", false);
+            return;
+        }
+
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
         enRangoDeAtaque = distanceToPlayer <= attackRadius;
@@ -57,12 +81,15 @@ public class EnemyController : MonoBehaviour
 
             if (Time.time >= tiempoSiguienteAtaque)
             {
-                
                 player.GetComponent<PlayerController>().RecibirDanio(puntosDeDanio);
-
+                animator.SetTrigger("Ataque");
                 Debug.Log("ENEMIGO ATACA AL JUGADOR");
-
                 tiempoSiguienteAtaque = Time.time + attackInterval;
+
+                
+                estaAtacando = true;
+                
+                StartCoroutine(EsperarFinAtaque());
             }
         }
         else
@@ -72,6 +99,23 @@ public class EnemyController : MonoBehaviour
         }
 
         animator.SetBool("EnMovimiento", EnMovimiento);
+    }
+
+    
+    private IEnumerator EsperarFinAtaque()
+    {
+        
+        yield return null;
+
+      
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        float duracionAtaque = stateInfo.length;
+
+        
+        yield return new WaitForSeconds(duracionAtaque);
+
+        
+        estaAtacando = false;
     }
 
     public void RecibirDanio(float puntos)
@@ -88,7 +132,7 @@ public class EnemyController : MonoBehaviour
             }
             else
             {
-                // Lógica de muerte del enemigo
+                
             }
         }
     }
@@ -103,7 +147,8 @@ public class EnemyController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!recibiendoDanio)
+        
+        if (!recibiendoDanio && !estaAtacando)
         {
             rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
         }

@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private bool recibiendoDanio = false;
 
     private Rigidbody2D rb;
-    private Jugador jugador; // Referencia al script Jugador
+    private Jugador jugador; 
 
     private float escalaX = 0.08692736f;
     private float escalaY = 0.0876511f;
@@ -25,16 +25,16 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        jugador = GetComponent<Jugador>(); // Obtenemos la referencia al inicio
+        jugador = GetComponent<Jugador>(); 
     }
 
     void Update()
     {
-        // VERIFICACI�N DE MUERTE: Salimos del m�todo si el jugador no est� vivo
+        
         if (!jugador.EstasVivo())
         {
-            rb.linearVelocity = Vector2.zero; // Detenemos al personaje
-            return; // No ejecutamos el resto del c�digo
+            rb.linearVelocity = Vector2.zero; 
+            return; 
         }
 
         float velocidadX = Input.GetAxis("Horizontal");
