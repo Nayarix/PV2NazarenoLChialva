@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Jugador : MonoBehaviour
 {
-    // Corregido: La variable 'vida' ahora es pública para que pueda ser accedida desde otros scripts
+    
     [Header("Configuracion")]
     public float vida = 5f;
 
