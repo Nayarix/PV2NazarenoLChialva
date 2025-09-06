@@ -428,7 +428,7 @@ MonoBehaviour:
   attackRadius: 1
   attackInterval: 2
   puntosDeDanio: 2
-  vida: 30
+  vida: 10
 --- !u!61 &95510927
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1551,7 +1551,7 @@ MonoBehaviour:
   attackRadius: 1
   attackInterval: 2
   puntosDeDanio: 2
-  vida: 30
+  vida: 10
 --- !u!95 &700451745
 Animator:
   serializedVersion: 7
@@ -2260,7 +2260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d88c54e0339cd4a9409c97d38bc410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vida: 10
+  vida: 15
 --- !u!61 &1269990163762147367
 BoxCollider2D:
   m_ObjectHideFlags: 0
