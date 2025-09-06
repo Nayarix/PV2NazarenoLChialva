@@ -8,8 +8,8 @@ public class EnemyController : MonoBehaviour
     public float detectRadius = 5.0f;
     public float speed = 2.0f;
     public float attackRadius = 1.0f;
-    public float attackInterval = 1.0f;
-    public float puntosDeDanio = 5.0f;
+    public float attackInterval = 2.0f;
+    public float puntosDeDanio = 2.0f;
 
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -37,17 +37,18 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
+        
 
         if (!jugadorScript.EstasVivo())
         {
             EnMovimiento = false;
             movement = Vector2.zero;
             animator.SetBool("EnMovimiento", EnMovimiento);
+            animator.SetBool("Atacado", false);
             return;
         }
 
-        
-        if (estaAtacando)
+        if (estaAtacando || recibiendoDanio)
         {
             movement = Vector2.zero;
             EnMovimiento = false;
@@ -73,11 +74,13 @@ public class EnemyController : MonoBehaviour
             }
             movement = new Vector2(direction.x, 0);
             EnMovimiento = true;
+            animator.SetBool("Atacado", false);
         }
         else if (enRangoDeAtaque)
         {
             movement = Vector2.zero;
             EnMovimiento = false;
+            animator.SetBool("Atacado", false);
 
             if (Time.time >= tiempoSiguienteAtaque)
             {
@@ -86,9 +89,7 @@ public class EnemyController : MonoBehaviour
                 Debug.Log("ENEMIGO ATACA AL JUGADOR");
                 tiempoSiguienteAtaque = Time.time + attackInterval;
 
-                
                 estaAtacando = true;
-                
                 StartCoroutine(EsperarFinAtaque());
             }
         }
@@ -96,25 +97,21 @@ public class EnemyController : MonoBehaviour
         {
             movement = Vector2.zero;
             EnMovimiento = false;
+            animator.SetBool("Atacado", false);
         }
 
         animator.SetBool("EnMovimiento", EnMovimiento);
     }
 
-    
     private IEnumerator EsperarFinAtaque()
     {
-        
         yield return null;
 
-      
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         float duracionAtaque = stateInfo.length;
 
-        
         yield return new WaitForSeconds(duracionAtaque);
 
-        
         estaAtacando = false;
     }
 
@@ -127,30 +124,51 @@ public class EnemyController : MonoBehaviour
 
             if (vida > 0)
             {
-                animator.SetBool("RecibeDanio", true);
-                StartCoroutine(DanioCorrutina());
+                animator.SetBool("Atacado", true);
+                recibiendoDanio = true;
+
+                StartCoroutine(RecuperarseDeDanio());
             }
             else
             {
-                
+                Morir();
             }
         }
     }
 
-    private IEnumerator DanioCorrutina()
+    private IEnumerator RecuperarseDeDanio()
     {
-        recibiendoDanio = true;
-        yield return new WaitForSeconds(0.5f);
-        animator.SetBool("RecibeDanio", false);
+        yield return null;
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        float duracionDanio = stateInfo.length;
+
+        yield return new WaitForSeconds(duracionDanio);
+
+        animator.SetBool("Atacado", false);
         recibiendoDanio = false;
+    }
+
+    private void Morir()
+    {
+        
+        animator.SetBool("Muerto", true);
+
+       
+        rb.bodyType = RigidbodyType2D.Static; 
+        GetComponent<Collider2D>().enabled = false; 
+        this.enabled = false; 
     }
 
     void FixedUpdate()
     {
-        
-        if (!recibiendoDanio && !estaAtacando)
+        if (!recibiendoDanio && !estaAtacando && !animator.GetBool("Atacado"))
         {
             rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
         }
+    }
+
+    public bool PuedeMoverse()
+    {
+        return !recibiendoDanio && !estaAtacando && !animator.GetBool("Atacado");
     }
 }

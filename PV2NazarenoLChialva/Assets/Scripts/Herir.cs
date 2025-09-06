@@ -3,7 +3,7 @@ using UnityEngine;
 public class HerirEnemigo : MonoBehaviour
 {
     [Header("Configuracion")]
-    [SerializeField] float puntosDeDanio = 5f;
+    [SerializeField] float puntosDeDanio = 3.0f;
 
     private void OnTriggerEnter2D(Collider2D other)
     {

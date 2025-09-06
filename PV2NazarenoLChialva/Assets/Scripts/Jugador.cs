@@ -6,7 +6,7 @@ public class Jugador : MonoBehaviour
 {
     
     [Header("Configuracion")]
-    public float vida = 5f;
+    public float vida = 10.0f;
 
     public void ModificarVida(float puntos)
     {
