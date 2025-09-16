@@ -100,12 +100,12 @@ TextureImporter:
       name: 0_Fallen_Angels_Idle_000_0
       rect:
         serializedVersion: 2
-        x: 223
+        x: 120
         y: 148
-        width: 438
-        height: 576
+        width: 584
+        height: 584
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -122,7 +122,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 853325ef01a711f47adaf38b3df4f4c3
     internalID: 0
     vertices: []
     indices: 
