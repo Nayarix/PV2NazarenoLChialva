@@ -427,7 +427,7 @@ MonoBehaviour:
   speed: 2
   attackRadius: 1
   attackInterval: 2
-  puntosDeDanio: 8
+  puntosDeDanio: 2
   capaSuelo:
     serializedVersion: 2
     m_Bits: 0
@@ -592,6 +592,7 @@ GameObject:
   - component: {fileID: 158150989}
   - component: {fileID: 158150988}
   - component: {fileID: 158150987}
+  - component: {fileID: 158150990}
   m_Layer: 0
   m_Name: Meta
   m_TagString: Meta
@@ -715,6 +716,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &158150990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 158150986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c95c6cb43dabbe49b75e92e24ad5d1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teclaReset: 114
+  resetAlTocar: 1
 --- !u!1001 &364762343
 PrefabInstance:
   m_ObjectHideFlags: 0
