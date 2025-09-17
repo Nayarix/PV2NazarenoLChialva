@@ -326,11 +326,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7538951676499562910, guid: c8da9661303022847b107554afe16dd7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.37
+      value: -7.3
       objectReference: {fileID: 0}
     - target: {fileID: 7538951676499562910, guid: c8da9661303022847b107554afe16dd7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.22
+      value: 2.92
       objectReference: {fileID: 0}
     - target: {fileID: 7538951676499562910, guid: c8da9661303022847b107554afe16dd7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -428,6 +428,10 @@ MonoBehaviour:
   attackRadius: 1
   attackInterval: 2
   puntosDeDanio: 2
+  capaSuelo:
+    serializedVersion: 2
+    m_Bits: 0
+  longitudRaycast: 0.79
   vida: 10
 --- !u!61 &95510927
 BoxCollider2D:
@@ -1551,6 +1555,10 @@ MonoBehaviour:
   attackRadius: 1
   attackInterval: 2
   puntosDeDanio: 2
+  capaSuelo:
+    serializedVersion: 2
+    m_Bits: 72
+  longitudRaycast: 0.79
   vida: 10
 --- !u!95 &700451745
 Animator:
@@ -2388,11 +2396,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7538951676499562910, guid: c8da9661303022847b107554afe16dd7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.4
+      value: -5.6
       objectReference: {fileID: 0}
     - target: {fileID: 7538951676499562910, guid: c8da9661303022847b107554afe16dd7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.25
+      value: 2.98
       objectReference: {fileID: 0}
     - target: {fileID: 7538951676499562910, guid: c8da9661303022847b107554afe16dd7, type: 3}
       propertyPath: m_LocalPosition.z
