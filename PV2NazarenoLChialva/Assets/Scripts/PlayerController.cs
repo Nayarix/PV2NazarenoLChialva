@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private bool recibiendoDanio = false;
 
     private Rigidbody2D rb;
-    private Jugador jugador; 
+    private Jugador jugador;
 
     private float escalaX = 0.08692736f;
     private float escalaY = 0.0876511f;
@@ -25,16 +25,25 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        jugador = GetComponent<Jugador>(); 
+        jugador = GetComponent<Jugador>();
     }
 
     void Update()
     {
-        
         if (!jugador.EstasVivo())
         {
-            rb.linearVelocity = Vector2.zero; 
-            return; 
+            if (animator.GetBool("Muerto"))
+            {
+                animator.SetBool("Muerto", false);
+                animator.Play("Idle");
+            }
+            return;
+        }
+
+        if (!jugador.EstasVivo())
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
         }
 
         float velocidadX = Input.GetAxis("Horizontal");
@@ -96,21 +105,43 @@ public class PlayerController : MonoBehaviour
             if (!jugador.EstasVivo())
             {
                 animator.SetBool("Muerto", true);
+                rb.linearVelocity = Vector2.zero;
+                rb.bodyType = RigidbodyType2D.Static;
+                GetComponent<Collider2D>().enabled = false;
+                this.enabled = false;
+                StartCoroutine(RespawnDespuesDeMuerte());
             }
             else
             {
                 animator.SetBool("RecibeDanio", true);
-                StartCoroutine(DanioCorrutina());
+                StartCoroutine(DanioCorrutina()); 
             }
         }
     }
 
+    
     private IEnumerator DanioCorrutina()
     {
         recibiendoDanio = true;
         yield return new WaitForSeconds(tiempoInvencibilidad);
         animator.SetBool("RecibeDanio", false);
         recibiendoDanio = false;
+    }
+
+    private IEnumerator RespawnDespuesDeMuerte()
+    {
+        yield return new WaitForSeconds(2f);
+        GetComponent<Jugador>().Respawn();
+    }
+
+    public void ReactivarJugador()
+    {
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        GetComponent<Collider2D>().enabled = true;
+        this.enabled = true;
+        animator.SetBool("RecibeDanio", false);
+        animator.SetBool("Atacando", false);
+        animator.SetFloat("movement", 0f);
     }
 
     void OnDrawGizmos()
