@@ -14,7 +14,7 @@ public class BarraVida : MonoBehaviour
     {
         if (jugador != null)
         {
-            vidaInicial = jugador.vida; 
+            vidaInicial = jugador.vidaActual; 
         }
     }
 
@@ -27,7 +27,7 @@ public class BarraVida : MonoBehaviour
             if (vidaInicial > 0)
             {
                 
-                RellenobarraVida.fillAmount = jugador.vida / vidaInicial;
+                RellenobarraVida.fillAmount = jugador.vidaActual / vidaInicial;
             }
         }
     }

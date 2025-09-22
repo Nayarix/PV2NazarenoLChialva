@@ -5,64 +5,65 @@ using UnityEngine;
 public class Jugador : MonoBehaviour
 {
     [Header("Configuracion")]
-    public float vida = 15.0f;
+    public float vidaActual = 15.0f; 
     public float vidaMaxima = 15.0f;
+    public float danioAtaque = 5.0f;
 
     [Header("Respawn")]
-    public Vector3 puntoRespawn; 
+    public Vector3 puntoRespawn;
     private Vector3 posicionInicial;
 
     void Start()
     {
-        
         posicionInicial = transform.position;
         puntoRespawn = posicionInicial;
 
-        
-        vidaMaxima = vida;
+       
+        vidaActual = vidaMaxima;
     }
 
+    
     public void ModificarVida(float puntos)
     {
-        vida += puntos;
+        vidaActual += puntos;
 
-        
-        if (vida > vidaMaxima)
+        if (vidaActual > vidaMaxima)
         {
-            vida = vidaMaxima;
+            vidaActual = vidaMaxima;
         }
 
-        Debug.Log("Vida actual del jugador: " + vida);
+        Debug.Log("Vida actual del jugador: " + vidaActual);
+    }
+
+    
+    public void ModificarDanio(float cantidad)
+    {
+        danioAtaque += cantidad;
     }
 
     public bool EstasVivo()
     {
-        return vida > 0;
+        return vidaActual > 0;
     }
 
     public void Respawn()
     {
         if (!EstasVivo())
         {
-            // Restaurar vida
-            vida = vidaMaxima;
-
-            // Reposicionar al jugador en el punto de respawn
+            vidaActual = vidaMaxima;
             transform.position = puntoRespawn;
 
-            // Reactivar componentes a través del PlayerController
             PlayerController playerController = GetComponent<PlayerController>();
             if (playerController != null)
             {
                 playerController.ReactivarJugador();
             }
 
-            // Resetear solo la animación de muerte
             Animator animator = GetComponent<Animator>();
             if (animator != null)
             {
                 animator.SetBool("Muerto", false);
-                animator.Play("Idle", 0, 0f); // Forzar animación idle
+                animator.Play("Idle", 0, 0f);
             }
 
             Debug.Log("Jugador ha reaparecido con vida completa");
@@ -74,17 +75,12 @@ public class Jugador : MonoBehaviour
         Animator animator = GetComponent<Animator>();
         if (animator != null)
         {
-            
             animator.SetBool("Muerto", false);
             animator.SetBool("RecibeDanio", false);
             animator.SetBool("Atacando", false);
-            animator.SetBool("EnSuelo", true); 
-
-            
-            animator.ResetTrigger("Ataque"); 
-
-            
-            animator.Play("Idle", 0, 0f); 
+            animator.SetBool("EnSuelo", true);
+            animator.ResetTrigger("Ataque");
+            animator.Play("Idle", 0, 0f);
         }
     }
 
