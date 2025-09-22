@@ -2,8 +2,18 @@ using UnityEngine;
 
 public class HerirEnemigo : MonoBehaviour
 {
-    [Header("Configuracion")]
-    [SerializeField] float puntosDeDanio = 3.0f;
+    private Jugador jugador;
+
+    void Start()
+    {
+        jugador = GetComponentInParent<Jugador>();
+
+        if (jugador == null)
+        {
+            Debug.LogError("Error: el script 'HerirEnemigo' no encontró el componente 'Jugador' en el objeto padre. " +
+                           "Asegúrate de que este script esté en un hijo del objeto del jugador.");
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -11,10 +21,10 @@ public class HerirEnemigo : MonoBehaviour
         {
             EnemyController enemigo = other.gameObject.GetComponent<EnemyController>();
 
-            if (enemigo != null)
+            if (enemigo != null && jugador != null)
             {
-                enemigo.RecibirDanio(puntosDeDanio);
-                Debug.Log("¡Enemigo dañado!");
+                enemigo.RecibirDanio(jugador.danioAtaque);
+                Debug.Log("¡Enemigo dañado con " + jugador.danioAtaque + " puntos de daño!");
             }
         }
     }

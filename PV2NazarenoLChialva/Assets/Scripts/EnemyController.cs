@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+
+    public float experienciaOtorgada = 10f;
+
     public Transform player;
     public float detectRadius = 5.0f;
     public float speed = 2.0f;
@@ -161,6 +164,8 @@ public class EnemyController : MonoBehaviour
 
     private void Morir()
     {
+        ProgressionManager.Instance.AddExperience(experienciaOtorgada);
+
         animator.SetBool("Muerto", true);
         rb.bodyType = RigidbodyType2D.Static;
         GetComponent<Collider2D>().enabled = false;
