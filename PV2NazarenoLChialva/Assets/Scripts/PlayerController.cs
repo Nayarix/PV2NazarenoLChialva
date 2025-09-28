@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(new Vector2(0f, FuezaDeSalto), ForceMode2D.Impulse);
         }
 
-        if (Input.GetKeyDown(KeyCode.Z) && !estaAtacando && EnSuelo)
+        if ((Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.Mouse0)) && !estaAtacando && EnSuelo)
         {
             IniciarAtaque();
         }

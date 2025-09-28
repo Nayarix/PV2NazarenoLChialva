@@ -7,7 +7,7 @@ public class Jugador : MonoBehaviour
     [Header("Configuracion")]
     public float vidaActual = 15.0f; 
     public float vidaMaxima = 15.0f;
-    public float danioAtaque = 5.0f;
+    public float danioAtaque = 3.0f;
 
     [Header("Respawn")]
     public Vector3 puntoRespawn;
