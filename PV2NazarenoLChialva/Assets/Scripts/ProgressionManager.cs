@@ -50,4 +50,22 @@ public class ProgressionManager : MonoBehaviour
         jugador.ModificarVida(progressionData.levels[currentLevel - 1].healthIncrease);
         jugador.ModificarDanio(progressionData.levels[currentLevel - 1].damageIncrease);
     }
+    public int GetCurrentLevel()
+    {
+        return currentLevel;
+    }
+
+    public float GetCurrentExp()
+    {
+        return currentExp;
+    }
+
+    public float GetRequiredExpForLevel(int levelIndex)
+    {
+        if (levelIndex >= 0 && levelIndex < progressionData.levels.Length)
+        {
+            return progressionData.levels[levelIndex].expRequired;
+        }
+        return Mathf.Infinity;
+    }
 }
