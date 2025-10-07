@@ -164,12 +164,15 @@ public class EnemyController : MonoBehaviour
 
     private void Morir()
     {
+      
         ProgressionManager.Instance.AddExperience(experienciaOtorgada);
 
         animator.SetBool("Muerto", true);
         rb.bodyType = RigidbodyType2D.Static;
         GetComponent<Collider2D>().enabled = false;
         this.enabled = false;
+
+        gameObject.SetActive(false);
     }
 
     void FixedUpdate()
@@ -187,4 +190,23 @@ public class EnemyController : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * longitudRaycast);
     }
+
+    void OnEnable()
+    {
+
+        this.enabled = true;
+
+
+        vida = 10f; 
+
+
+        GetComponent<Collider2D>().enabled = true;
+        rb.bodyType = RigidbodyType2D.Dynamic;
+
+    
+        animator.SetBool("Muerto", false);
+
+      
+    }
+
 }
