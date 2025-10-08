@@ -1,10 +1,9 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-
     public float experienciaOtorgada = 10f;
 
     public Transform player;
@@ -42,7 +41,11 @@ public class EnemyController : MonoBehaviour
         enSuelo = false;
         estaCayendo = false;
 
-        jugadorScript = player.GetComponent<Jugador>();
+        if (player != null)
+        {
+            jugadorScript = player.GetComponent<Jugador>();
+        }
+
     }
 
     void Update()
@@ -59,7 +62,7 @@ public class EnemyController : MonoBehaviour
             return;
         }
 
-        if (!jugadorScript.EstasVivo())
+        if (jugadorScript == null || !jugadorScript.EstasVivo())
         {
             EnMovimiento = false;
             movement = Vector2.zero;
@@ -164,49 +167,52 @@ public class EnemyController : MonoBehaviour
 
     private void Morir()
     {
-      
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
+
         ProgressionManager.Instance.AddExperience(experienciaOtorgada);
 
         animator.SetBool("Muerto", true);
-        rb.bodyType = RigidbodyType2D.Static;
-        GetComponent<Collider2D>().enabled = false;
-        this.enabled = false;
 
-        gameObject.SetActive(false);
+        if (rb != null)
+        {
+            rb.bodyType = RigidbodyType2D.Static;
+        }
+
+        if (GetComponent<Collider2D>() != null)
+        {
+            GetComponent<Collider2D>().enabled = false;
+        }
+        StartCoroutine(EsperarMuerteYDesactivar());
+
+        this.enabled = false;
+    }
+
+    private IEnumerator EsperarMuerteYDesactivar()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        this.enabled = false;
     }
 
     void FixedUpdate()
     {
+        if (!this.enabled)
+        {
+            return;
+        }
+
         if (!recibiendoDanio && !estaAtacando)
         {
-            
             rb.linearVelocity = new Vector2(movement.x * speed, rb.linearVelocity.y);
         }
     }
 
-    
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * longitudRaycast);
     }
-
-    void OnEnable()
-    {
-
-        this.enabled = true;
-
-
-        vida = 10f; 
-
-
-        GetComponent<Collider2D>().enabled = true;
-        rb.bodyType = RigidbodyType2D.Dynamic;
-
-    
-        animator.SetBool("Muerto", false);
-
-      
-    }
-
 }
