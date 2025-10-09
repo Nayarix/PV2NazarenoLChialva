@@ -28,6 +28,8 @@ public class EnemyController : MonoBehaviour
     private bool estaCayendo;
 
     private Jugador jugadorScript;
+    private const string POOL_TAG = "Goblin";
+
 
     [Header("Vida del Enemigo")]
     [SerializeField] private float vida = 10f;
@@ -167,17 +169,13 @@ public class EnemyController : MonoBehaviour
 
     private void Morir()
     {
-        if (rb != null)
-        {
-            rb.linearVelocity = Vector2.zero;
-        }
-
         ProgressionManager.Instance.AddExperience(experienciaOtorgada);
 
         animator.SetBool("Muerto", true);
 
         if (rb != null)
         {
+            rb.linearVelocity = Vector2.zero;
             rb.bodyType = RigidbodyType2D.Static;
         }
 
@@ -185,16 +183,20 @@ public class EnemyController : MonoBehaviour
         {
             GetComponent<Collider2D>().enabled = false;
         }
-        StartCoroutine(EsperarMuerteYDesactivar());
 
         this.enabled = false;
+
+        StartCoroutine(EsperarMuerteYDevolverAPool());
     }
 
-    private IEnumerator EsperarMuerteYDesactivar()
+    private IEnumerator EsperarMuerteYDevolverAPool()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(1.0f); 
 
-        this.enabled = false;
+        if (ObjectPooler.Instance != null)
+        {
+            ObjectPooler.Instance.ReturnObjectToPool(POOL_TAG, gameObject);
+        }
     }
 
     void FixedUpdate()

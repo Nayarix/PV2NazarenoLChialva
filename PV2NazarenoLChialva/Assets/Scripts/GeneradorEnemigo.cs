@@ -1,50 +1,67 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GeneradorObjeto : MonoBehaviour
 {
+    [Header("Configuración de Generación")]
+    [Tooltip("Prefab del enemigo a generar.")]
     [SerializeField] private GameObject objetoPrefab;
 
-    [SerializeField]
-    [Range(0.5f, 5f)]
-    private float tiempoEspera;
+    [Tooltip("Tiempo de pausa entre la generación de cada enemigo.")]
+    [SerializeField] private float tiempoEntreGeneraciones = 10.0f;
 
-  
-    public Transform playerTarget;
+    [HideInInspector] public Transform playerTarget;
 
-    void Start()
+    private int enemigosRestantes = 0;
+
+    private void Awake()
     {
-       
-        if (playerTarget == null)
+        GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
+        if (playerGO != null)
         {
-            GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
-            if (playerGO != null)
-            {
-                playerTarget = playerGO.transform;
-            }
+            playerTarget = playerGO.transform;
         }
-
-        Invoke("GenerarObjeto", tiempoEspera);
     }
 
-    void GenerarObjeto()
+    public void IniciarGeneracionEnemigos()
     {
-     
+        enemigosRestantes = 3;
+
+        StartCoroutine(GeneracionEnemigosRoutine());
+    }
+
+    private IEnumerator GeneracionEnemigosRoutine()
+    {
+        while (enemigosRestantes > 0)
+        {
+            GenerarObjeto();
+            enemigosRestantes--;
+
+            yield return new WaitForSeconds(tiempoEntreGeneraciones);
+        }
+
+        Debug.Log("Generación de enemigos completada.");
+    }
+
+    private void GenerarObjeto()
+    {
+        if (objetoPrefab == null)
+        {
+            Debug.LogError("No hay prefab asignado en el GeneradorObjeto.");
+            return;
+        }
+
         GameObject newEnemyGO = Instantiate(objetoPrefab, transform.position, Quaternion.identity);
 
-        
         EnemyController newEnemyController = newEnemyGO.GetComponent<EnemyController>();
 
-        
         if (newEnemyController != null && playerTarget != null)
         {
-            
             newEnemyController.player = playerTarget;
         }
-        else
+        else if (playerTarget == null)
         {
-            Debug.LogWarning("No se pudo asignar el target del jugador al enemigo generado.");
+            Debug.LogError("Referencia del jugador no encontrada. Los enemigos no se moverán.");
         }
     }
 }

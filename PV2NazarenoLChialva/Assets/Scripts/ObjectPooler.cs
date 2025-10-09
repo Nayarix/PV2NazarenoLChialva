@@ -5,20 +5,15 @@ public class ObjectPooler : MonoBehaviour
 {
     public static ObjectPooler Instance;
 
-    [System.Serializable]
-    public class Pool
-    {
-        public PoolableObjectData data;
+    [Header("Configuración de Pools")]
+    public PoolableObjectData[] pools;
 
-        [HideInInspector]
-        public Queue<GameObject> objectPool;
-    }
-
-    public List<Pool> pools; 
-    private Dictionary<string, Pool> poolDictionary;
+    
+    private Dictionary<string, Queue<GameObject>> poolDictionary;
 
     void Awake()
     {
+        
         if (Instance == null)
         {
             Instance = this;
@@ -26,30 +21,32 @@ public class ObjectPooler : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
 
-        poolDictionary = new Dictionary<string, Pool>();
+        InitializePools();
+    }
 
-        foreach (Pool pool in pools)
+    private void InitializePools()
+    {
+        poolDictionary = new Dictionary<string, Queue<GameObject>>();
+
+        foreach (PoolableObjectData pool in pools)
         {
-            pool.objectPool = new Queue<GameObject>();
+            Queue<GameObject> objectPool = new Queue<GameObject>();
 
-            if (!poolDictionary.ContainsKey(pool.data.poolTag))
+            for (int i = 0; i < pool.poolSize; i++)
             {
-                poolDictionary.Add(pool.data.poolTag, pool);
-            }
-
-            
-            for (int i = 0; i < pool.data.poolSize; i++)
-            {
-                GameObject obj = Instantiate(pool.data.prefab);
+                GameObject obj = Instantiate(pool.prefab);
                 obj.SetActive(false); 
-                pool.objectPool.Enqueue(obj); 
+                objectPool.Enqueue(obj);
             }
+
+            poolDictionary.Add(pool.poolTag, objectPool);
         }
     }
 
-   
+
     public GameObject GetPooledObject(string tag, Vector3 position, Quaternion rotation)
     {
         if (!poolDictionary.ContainsKey(tag))
@@ -58,14 +55,15 @@ public class ObjectPooler : MonoBehaviour
             return null;
         }
 
-        Pool pool = poolDictionary[tag];
+        PoolableObjectData poolData = GetPoolDataByTag(tag);
+        if (poolData == null) return null;
 
-        if (pool.objectPool.Count == 0)
+        if (poolDictionary[tag].Count == 0)
         {
-            if (pool.data.shouldExpand)
+
+            if (poolData.shouldExpand)
             {
-           
-                GameObject newObj = Instantiate(pool.data.prefab);
+                GameObject newObj = Instantiate(poolData.prefab);
 
                 newObj.transform.position = position;
                 newObj.transform.rotation = rotation;
@@ -79,30 +77,37 @@ public class ObjectPooler : MonoBehaviour
             }
         }
 
-       
-        GameObject objectToSpawn = pool.objectPool.Dequeue();
 
-      
+        GameObject objectToSpawn = poolDictionary[tag].Dequeue();
+
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;
-        objectToSpawn.SetActive(true);
-
+        objectToSpawn.SetActive(true); 
 
         return objectToSpawn;
     }
 
-    
     public void ReturnObjectToPool(string tag, GameObject objectToReturn)
     {
         if (!poolDictionary.ContainsKey(tag))
         {
-            Debug.LogWarning("Pool con tag " + tag + " no existe.");
-            
             Destroy(objectToReturn);
             return;
         }
 
-        objectToReturn.SetActive(false);
-        poolDictionary[tag].objectPool.Enqueue(objectToReturn);
+        objectToReturn.SetActive(false); 
+        poolDictionary[tag].Enqueue(objectToReturn);
+    }
+
+    private PoolableObjectData GetPoolDataByTag(string tag)
+    {
+        foreach (PoolableObjectData poolData in pools)
+        {
+            if (poolData.poolTag == tag)
+            {
+                return poolData;
+            }
+        }
+        return null;
     }
 }
