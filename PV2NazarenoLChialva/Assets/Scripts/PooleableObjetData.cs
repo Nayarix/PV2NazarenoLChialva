@@ -1,6 +1,6 @@
 using UnityEngine;
 
-// Permite crear archivos de configuración desde el menú de Unity
+
 [CreateAssetMenu(fileName = "PoolData", menuName = "Pooling/Poolable Object Data", order = 1)]
 public class PoolableObjectData : ScriptableObject
 {
@@ -17,7 +17,7 @@ public class PoolableObjectData : ScriptableObject
     [Tooltip("Permitir que la piscina cree nuevos objetos si se agota.")]
     public bool shouldExpand = true;
 
-    // --- Configuración de Spawn (Usada por el Spawner) ---
+
     [Header("Configuración de Spawn (Opcional)")]
     [Tooltip("Tiempo de pausa entre la generación de cada enemigo.")]
     public float timeBetweenSpawns = 2.0f;
