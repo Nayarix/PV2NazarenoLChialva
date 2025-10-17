@@ -22,10 +22,20 @@ public class PlayerController : MonoBehaviour
     private float escalaX = 0.08692736f;
     private float escalaY = 0.0876511f;
 
+    [Header("Audio")]
+    public AudioSource audioSource; 
+    public AudioClip clipAtaque;    
+    public AudioClip clipDanio;     
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         jugador = GetComponent<Jugador>();
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+
     }
 
     void Update()
@@ -82,24 +92,38 @@ public class PlayerController : MonoBehaviour
         {
             transform.localScale = new Vector3(-escalaX, escalaY, 1f);
         }
+
+
     }
 
     private void IniciarAtaque()
     {
         estaAtacando = true;
         animator.SetBool("Atacando", estaAtacando);
+
+        if (audioSource != null && clipAtaque != null)
+        {
+            audioSource.PlayOneShot(clipAtaque);
+        }
     }
 
     public void DesactivarAtaque()
     {
         estaAtacando = false;
         animator.SetBool("Atacando", estaAtacando);
+
+
     }
 
     public void RecibirDanio(float puntos)
     {
         if (!recibiendoDanio)
         {
+            if (audioSource != null && clipDanio != null)
+            {
+                audioSource.PlayOneShot(clipDanio);
+            }
+
             GetComponent<Jugador>().ModificarVida(-puntos);
 
             if (!jugador.EstasVivo())
