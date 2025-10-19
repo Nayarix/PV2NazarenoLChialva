@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+
+
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip clipAtaque;
+    public AudioClip clipDanio;
+
+
     public float experienciaOtorgada = 10f;
 
     public Transform player;
@@ -112,6 +120,12 @@ public class EnemyController : MonoBehaviour
                 player.GetComponent<PlayerController>().RecibirDanio(puntosDeDanio);
                 animator.SetTrigger("Ataque");
                 Debug.Log("ENEMIGO ATACA AL JUGADOR");
+
+                if (audioSource != null && clipAtaque != null)
+                {
+                    audioSource.PlayOneShot(clipAtaque);
+                }
+
                 tiempoSiguienteAtaque = Time.time + attackInterval;
 
                 estaAtacando = true;
@@ -141,6 +155,12 @@ public class EnemyController : MonoBehaviour
     {
         if (!recibiendoDanio)
         {
+
+            if (audioSource != null && clipDanio != null)
+            {
+                audioSource.PlayOneShot(clipDanio);
+            }
+
             vida -= puntos;
             Debug.Log("Vida del enemigo: " + vida);
 

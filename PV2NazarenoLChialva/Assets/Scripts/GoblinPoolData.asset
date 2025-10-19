@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GoblinPoolData
   m_EditorClassIdentifier: Assembly-CSharp::PoolableObjectData
   poolTag: Goblin
-  prefab: {fileID: 5794068470394784725, guid: 1262b8ccc45042047a5047b785de65cd, type: 3}
+  prefab: {fileID: 5794068470394784725, guid: e671ee2ac5123b448a23cb1e31a642cb, type: 3}
   poolSize: 3
   shouldExpand: 1
   timeBetweenSpawns: 2
